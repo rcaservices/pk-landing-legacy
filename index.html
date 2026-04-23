@@ -841,7 +841,7 @@
       </div>
 
       <div class="signup-success" id="signupSuccess">
-        <p><strong>Account created.</strong> Redirecting you to your dashboard...</p>
+        <p><strong>Account created.</strong> Redirecting you to sign in...</p>
       </div>
 
       <ul class="signup-trust-list">
@@ -933,21 +933,13 @@
           event_category: 'conversion'
         });
 
-        // Store the JWT token
-        const token = data.token;
-        if (token) {
-          // Store in localStorage so the app recognizes the session
-          const raw = token.startsWith('Bearer ') ? token.substring(7) : token;
-          localStorage.setItem('pk_token', raw);
-        }
-
         // Show success, hide form
         formEl.style.display = 'none';
         successEl.style.display = 'block';
 
-        // Redirect to dashboard after brief pause
+        // Redirect to login — account is created, they just sign in
         setTimeout(function() {
-          window.location.href = 'https://policykeeper.ai/dashboard';
+          window.location.href = 'https://policykeeper.ai/login';
         }, 1500);
 
       } catch (err) {
