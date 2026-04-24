@@ -940,12 +940,12 @@
         formEl.style.display = 'none';
         successEl.style.display = 'block';
 
-        // Pass token via URL so the app auto-logs them in
+        // Redirect via /impersonate route which stores token and goes to dashboard
         var token = data.token;
         if (token) {
           token = token.replace(/^Bearer\s+/i, '');
           setTimeout(function() {
-            window.location.href = 'https://policykeeper.ai/dashboard?token=' + encodeURIComponent(token);
+            window.location.href = 'https://policykeeper.ai/impersonate#token=' + encodeURIComponent(token);
           }, 1500);
         } else {
           setTimeout(function() {
