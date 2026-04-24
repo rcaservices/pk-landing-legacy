@@ -844,7 +844,7 @@
       </div>
 
       <div class="signup-success" id="signupSuccess">
-        <p><strong>Account created.</strong> Redirecting you to sign in...</p>
+        <p><strong>Account created.</strong> Taking you to your dashboard...</p>
       </div>
 
       <ul class="signup-trust-list">
@@ -940,10 +940,18 @@
         formEl.style.display = 'none';
         successEl.style.display = 'block';
 
-        // Redirect to login — account is created, they just sign in
-        setTimeout(function() {
-          window.location.href = 'https://policykeeper.ai/login';
-        }, 1500);
+        // Pass token via URL so the app auto-logs them in
+        var token = data.token;
+        if (token) {
+          token = token.replace(/^Bearer\s+/i, '');
+          setTimeout(function() {
+            window.location.href = 'https://policykeeper.ai/dashboard?token=' + encodeURIComponent(token);
+          }, 1500);
+        } else {
+          setTimeout(function() {
+            window.location.href = 'https://policykeeper.ai/login';
+          }, 1500);
+        }
 
       } catch (err) {
         errorEl.textContent = err.message;
